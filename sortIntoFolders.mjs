@@ -42,18 +42,18 @@ for (const fileName of fileNames) {
   const month = date.slice(4, 6);
 
   // create the new date folder name using the lookup object
-  const dateFolderName = year + " " + months[month];
+  const dateFolderName = `${year} ${months[month]}`;
 
   // Check if we already have a folder for the date of the photo. If not, create one.
   try {
-    await fs.access(sortedFolderPath + "/" + dateFolderName);
+    await fs.access(`${sortedFolderPath}/${dateFolderName}`);
   } catch {
-    await fs.mkdir(sortedFolderPath + "/" + dateFolderName);
+    await fs.mkdir(`${sortedFolderPath}/${dateFolderName}`);
   }
 
   // move all photos into their new home
   await fs.rename(
-    photosFolderPath + "/" + fileName,
-    sortedFolderPath + "/" + dateFolderName + "/" + fileName
+    `${photosFolderPath}/${fileName}`,
+    `${sortedFolderPath}/${dateFolderName}/${fileName}`
   );
 }
