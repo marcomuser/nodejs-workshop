@@ -1,10 +1,10 @@
 import fs from "fs/promises";
 
-const folderPath = "./photos/";
+const folderPath = "./photos";
 
-const photoPaths = await fs.readdir("./photos");
+const fileNames = await fs.readdir(folderPath);
 
-for (const photoPath of photoPaths) {
-  const photoMetaData = await fs.stat(folderPath + photoPath);
+for (const fileName of fileNames) {
+  const photoMetaData = await fs.stat(folderPath + "/" + fileName);
   console.log(photoMetaData);
 }
