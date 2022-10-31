@@ -51,7 +51,7 @@ for (const fileName of fileNames) {
     await fs.mkdir(`${sortedFolderPath}/${dateFolderName}`);
   }
 
-  // move all photos into their new home
+  // move photo into its new home
   await fs.rename(
     `${photosFolderPath}/${fileName}`,
     `${sortedFolderPath}/${dateFolderName}/${fileName}`
