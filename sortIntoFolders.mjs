@@ -1,13 +1,13 @@
 import fs from "fs/promises";
 
-const photosFolderPath = "./photos";
-const sortedFolderPath = "./sorted";
+let photosFolderPath = "./photos";
+let sortedFolderPath = "./sorted";
 
 // get an array with all file names of our photos
-const fileNames = await fs.readdir(photosFolderPath);
+let fileNames = await fs.readdir(photosFolderPath);
 
 // lookup object to match the correct name of the month
-const months = {
+let months = {
   "01": "January",
   "02": "Feburary",
   "03": "March",
@@ -30,19 +30,25 @@ try {
 }
 
 // loop over all file names
-for (const fileName of fileNames) {
-  // extract the date from the file name
-  const date = fileName
-    .split("_")
-    .filter((substring) => substring.length === 8)
-    .join();
+for (let fileName of fileNames) {
+  // split filename string into chunks array
+  let chunks = fileName.split("_");
+
+  let date = "";
+
+  // find date string in chunks array
+  for (let chunk of chunks) {
+    if (chunk.length === 8) {
+      date = chunk;
+    }
+  }
 
   // extract the year and the month from the date string
-  const year = date.slice(0, 4);
-  const month = date.slice(4, 6);
+  let year = date.slice(0, 4);
+  let month = date.slice(4, 6);
 
   // create the new date folder name using the lookup object
-  const dateFolderName = `${year} ${months[month]}`;
+  let dateFolderName = `${year} ${months[month]}`;
 
   // Check if we already have a folder for the date of the photo. If not, create one.
   try {
